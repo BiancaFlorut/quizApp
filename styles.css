@@ -1,0 +1,30 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.question_footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listItem:hover {
+    background-color: rgb(249, 250, 250);
+}
+
+.check_answers {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}
