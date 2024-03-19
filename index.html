@@ -63,8 +63,24 @@
     </nav>
     <main>
       <div class="card" style="width: 35rem">
-        <img src="./imgs/quiz.png" class="card-img-top" alt="..." />
-        <div class="card-body">
+        <img id="profileImg" src="./imgs/quiz.png" class="card-img-top" alt="..." />
+        <div id="progressBarContainer" class="progress" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="height: 4px">
+          <div id="progressBar" class="progress-bar" style="width: 25%"></div>
+        </div>
+        <div 
+          class="card-body d-flex flex-column justify-content-center align-items-center" 
+          id="quizComplete"
+          style="display: none !important;">
+            <h1>Quiz beendet</h1>
+            <div class="d-flex flex-row justify-content-around">
+                <h2 class="text-primary pe-4">Dein Score</h2>
+                <h2>
+                  <span id="points">10</span>/<span id="totalPoints">10</span>
+                </h2>
+            </div>
+            <button class="btn btn-info" onclick="replay()">Wiederhole</button>
+        </div>
+        <div class="card-body" id="quizBody">
           <h5 id="questionText" class="card-title">Frage</h5>
           <ul class="list-group mb-2">
             <li class="list-group-item listItem" onclick="selectAnswer(0,0)">
