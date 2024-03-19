@@ -67,7 +67,6 @@ function selectAnswer(idQuestion, idAnswer) {
 }
 
 function switchAnswer(idAnswer) {
-  let answerElement = document.getElementById(`answer_${idAnswer + 1}`);
   console.log(`answer_${idAnswer + 1}`);
   if (answers.includes(idAnswer)) {
     answers.splice(answers.indexOf(idAnswer), 1);
@@ -79,6 +78,7 @@ function switchAnswer(idAnswer) {
 function checkAnswers(idQuestion) {
   let rightAnswers = 0;
   loadChosenAnswers();
+  disableAnswering();
   document.getElementById("checkButton").disabled = true;
   for (let i = 0; i < questions[idQuestion].correct_answer.length; i++) {
     const rightAnswer = questions[idQuestion].correct_answer[i];
@@ -86,13 +86,14 @@ function checkAnswers(idQuestion) {
       rightAnswers++;
       document.getElementById(`answer_${rightAnswer + 1}`).classList.add("text-bg-success");
     } else {
-      
-      for (let j = 0; j < answers.length; j++) {
-        const chosenAnswer = answers[j];
-        console.log(`answer_${chosenAnswer +1}`);
-        document.getElementById(`answer_${chosenAnswer +1}`).classList.add("text-bg-danger");
-      }
-      document.getElementById(`answer_${rightAnswer + 1}`).classList.add("text-bg-success");
+      document.getElementById(`answer_${rightAnswer + 1}`).classList.add("bg-success-subtle");
+    }
+  }
+  for (let j = 0; j < answers.length; j++) {
+    const chosenAnswer = answers[j];
+    if (!questions[idQuestion].correct_answer.includes(chosenAnswer)) {
+      console.log(`falsches antwort answer_${chosenAnswer + 1}`);
+      document.getElementById(`answer_${chosenAnswer + 1}`).classList.add("text-bg-danger");
     }
   }
   if (rightAnswers == questions[idQuestion].answers.length) {
@@ -101,24 +102,32 @@ function checkAnswers(idQuestion) {
   currentQuestion++;
 }
 
-function loadChosenAnswers(){
-    for (let i = 1; i < 6; i++) {
-        const element = document.getElementById(`${i}_answer`);
-        if (element.checked)
-            answers.push(+element.value);
-    }
+function loadChosenAnswers() {
+  for (let i = 1; i < 6; i++) {
+    const element = document.getElementById(`${i}_answer`);
+    if (element.checked) answers.push(+element.value);
+  }
+}
+
+function disableAnswering() {
+  for (let i = 1; i < 6; i++) {
+    const element = document.getElementById(`${i}_answer`);
+    element.disabled = true;
+  }
 }
 
 function clearAnswers() {
-  for (let i = 1; i < 6; i++) {    
+  for (let i = 1; i < 6; i++) {
     let answer = document.getElementById(`answer_${i}`);
     let checkBox = document.getElementById(`${i}_answer`);
     answer.classList.remove("text-bg-success");
-    if (checkBox.checked){
-        checkBox.click();
-        answer.classList.remove("text-bg-danger");
-        answer.classList.add("listItem");
-        answer.setAttribute("onclick", `selectAnswer(${currentQuestion}, ${i - 1})`);
+    answer.classList.remove("bg-success-subtle");
+    checkBox.disabled = false;
+    if (checkBox.checked) {
+      checkBox.click();
+      answer.classList.remove("text-bg-danger");
+      answer.classList.add("listItem");
+      answer.setAttribute("onclick", `selectAnswer(${currentQuestion}, ${i - 1})`);
     }
   }
   document.getElementById("checkButton").disabled = false;
