@@ -67,18 +67,33 @@
         <div class="card-body">
           <h5 id="questionText" class="card-title">Frage</h5>
           <ul class="list-group mb-2">
-            <li id="answer_1" class="list-group-item listItem" onclick="selectAnswer(0,0)"> The current link item </li>
-            <li id="answer_2" class="list-group-item listItem" onclick="selectAnswer(0,1)">A second link item</li>
-            <li id="answer_3" class="list-group-item listItem" onclick="selectAnswer(0,2)">A third link item</li>
-            <li id="answer_4" class="list-group-item listItem" onclick="selectAnswer(0,3)">A fourth link item</li>
-            <li id="answer_5" class="list-group-item listItem" onclick="selectAnswer(0,4)">A disabled link item</li>
+            <li class="list-group-item listItem" onclick="selectAnswer(0,0)">
+              <input class="form-check-input me-1" type="checkbox" value=0 id="1_answer" onclick="event.stopPropagation()"/>
+              <label id="answer_1" class="form-check-label" for="1_answer" onclick="event.stopPropagation()">The current link item </label>
+            </li>
+            <li class="list-group-item listItem" onclick="selectAnswer(0,1)">
+              <input class="form-check-input me-1" type="checkbox" value=1 id="2_answer" onclick="event.stopPropagation()"/>
+              <label id="answer_2" class="form-check-label" for="2_answer" onclick="event.stopPropagation()">A second link item</label>
+            </li>
+            <li class="list-group-item listItem" onclick="selectAnswer(0,2)">
+              <input class="form-check-input me-1" type="checkbox" value=2 id="3_answer" onclick="event.stopPropagation()"/>
+              <label id="answer_3" class="form-check-label" for="3_answer" onclick="event.stopPropagation()">A third link item</label>
+            </li>
+            <li class="list-group-item listItem" onclick="selectAnswer(0,3)">
+              <input class="form-check-input me-1" type="checkbox" value=3 id="4_answer" onclick="event.stopPropagation()"/>
+              <label id="answer_4" class="form-check-label" for="4_answer" onclick="event.stopPropagation()">A fourth link item</label>
+            </li>
+            <li class="list-group-item listItem" onclick="selectAnswer(0,4)">
+              <input class="form-check-input me-1" type="checkbox" value=4 id="5_answer" onclick="event.stopPropagation()"/>
+              <label id="answer_5" class="form-check-label" for="5_answer" onclick="event.stopPropagation()">A disabled link item</label>
+            </li>
           </ul>
           <div class="check_answers">
             <button id="checkButton" type="button" class="btn btn-primary" onclick="checkAnswers(0)">Check</button>
           </div>
           <div class="question_footer">
-            <div><b>1</b> von <b id="totalLength">5</b> Fragen</div>
-            <button class="btn btn-primary">Nächste Frage</button>
+            <div><b id="currentQuestion">1</b> von <b id="totalLength">5</b> Fragen</div>
+            <button id="nextQuestionButton" class="btn btn-primary" onclick="nextQuestion()">Nächste Frage</button>
           </div>
         </div>
       </div>
